@@ -38,16 +38,32 @@ def comparar(eo,ei,E,xi,ale):
         return E,eo,ale
     else:
         return E+1,ei,xi
-def Modificar_Sigma():
-    pass
+def Modificar_Sigma(E,Q):
+    var=5
+    float(var)
+    float(E)
+    C=0.1
+    if E/var == 0.2:
+        print "Se conserva Sigma\n"
+        print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q)
+        return Q
+    elif E/var < 0.2:
+        print "Se multiplica Sigma"
+        print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q*C)
+        return Q*C
+    elif E/var >0.2:
+        print "Se divide Sigma"
+        print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q/C)
+        return Q/C
 
 def main():
+    generaciones=10000
     x=0
     Q=0.1 #Q = Sigma
     g=0 #generacion
     E=0
     tam=int(raw_input("Ingrese el tamano del vector:\n"))
-    print "Ingrese el intervalo\n:"
+    print "Ingrese el intervalo:\n"
     min = int(raw_input("min:\n"))
     max= int(raw_input("max:\n"))
     #Generar numeros aleatorios del tamaño tam,
@@ -57,18 +73,21 @@ def main():
     imprimir(g,ale,eo,E)
     raw_input("Espera")
     #Establecer Q
-    while g!=100:
+    d=0 #numero de veces que quiero que se verifique sigma
+    while g!=generaciones:
         n=N(tam,Q)
         xi=Mutar(ale,n)
         ei = Evaluar(xi)
-        E,eo,x=comparar(eo,ei,E,xi,ale)
+        E,e,x=comparar(eo,ei,E,xi,ale)
         g=g+1
-        imprimir(g,x,ei,E)
-        if E == 10:
+        imprimir(g,x,e,E)
+        if d == 19:
             #Modificar Sigma.
-            Q=Modificar_Sigma()
+            Q=Modificar_Sigma(E,Q)
+            d=0
             E=0
-
+        else:
+            d=d+1
 
  #   while e!=10:
 
