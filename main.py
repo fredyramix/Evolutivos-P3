@@ -1,6 +1,9 @@
 # -*- encoding: utF-8 -*-
+from decimal import Decimal
+
 __author__ = 'Freddy'
 import random
+from funciones import *
 
 def Sol_ale(min,max,tam):
     vector = []
@@ -8,8 +11,7 @@ def Sol_ale(min,max,tam):
         vector.append(random.uniform(min,max))
     return vector
 def Evaluar(ale):
-    x=sum(ale)
-    fun = ((x**4)-(16*(x**2))+(5*x))/2
+    fun=fun2(ale)
     return fun
 
 def N(tam,Q):
@@ -34,9 +36,13 @@ def exitos(eo,ei,e):
         return e+1
 
 def comparar(eo,ei,E,xi,ale):
-    if eo < ei:
+    #print "Padre: "+str(eo)+"\n"
+    #print "Hijo: "+ str(ei)+"\n"
+    if eo <ei:
+        #print "Gano padre"
         return E,eo,ale
     else:
+        #print "Gano Hijo"
         return E+1,ei,xi
 def Modificar_Sigma(E,Q):
     var=5
@@ -44,52 +50,65 @@ def Modificar_Sigma(E,Q):
     float(E)
     C=0.1
     if E/var == 0.2:
-        print "Se conserva Sigma\n"
-        print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q)
+        #print "Se conserva Sigma\n"
+        #print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q)
         return Q
     elif E/var < 0.2:
-        print "Se multiplica Sigma"
-        print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q*C)
+        #print "Se multiplica Sigma"
+        #print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q*C)
         return Q*C
     elif E/var >0.2:
-        print "Se divide Sigma"
-        print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q/C)
+        #print "Se divide Sigma"
+        #print "Sigma anterior:" + str(Q) + "\tSigma nuevo:"+ str(Q/C)
         return Q/C
 
 def main():
-    generaciones=10000
+    generaciones=100000
+    d=0 #numero de veces que quiero que se verifique sigma
+    maximo=10
     x=0
     Q=0.1 #Q = Sigma
     g=0 #generacion
     E=0
-    tam=int(raw_input("Ingrese el tamano del vector:\n"))
-    print "Ingrese el intervalo:\n"
-    min = int(raw_input("min:\n"))
-    max= int(raw_input("max:\n"))
+    tam = 4
+    min=-5.12
+    max=5.12
     #Generar numeros aleatorios del tamaño tam,
     ale=Sol_ale(min,max,tam)
     #Evaluar.
     eo=Evaluar(ale) #evaluacion inicial
+    '''
+    donde:
+     g = numero de generación.
+     ale = vector solucion aletorio
+     eo = evaluación inicial 0
+     E = numero de éxitos.
+    '''
     imprimir(g,ale,eo,E)
-    raw_input("Espera")
+    raw_input("Presiona enter para continuar...")
     #Establecer Q
-    d=0 #numero de veces que quiero que se verifique sigma
+    g=1
     while g!=generaciones:
         n=N(tam,Q)
         xi=Mutar(ale,n)
+        #print "mutado:"+str(xi)+"\n"
+        #print "\n"
         ei = Evaluar(xi)
-        E,e,x=comparar(eo,ei,E,xi,ale)
-        g=g+1
-        imprimir(g,x,e,E)
-        if d == 19:
+        #print "evaluacion_mutado: "+str(ei)+"\n"
+        E,eo,ale=comparar(eo,ei,E,xi,ale)
+        #imprimir(g,ale,eo,E)
+        if g % maximo== 0:
             #Modificar Sigma.
             Q=Modificar_Sigma(E,Q)
-            d=0
             E=0
         else:
             d=d+1
+        g=g+1
+        #raw_input("Espera")
+    imprimir(g,ale,eo,E)
 
- #   while e!=10:
+ #   while e!=10:2
+
 
 
 
