@@ -1,6 +1,7 @@
 # -*- encoding: utF-8 -*-
 import random
-from math import sin,sqrt
+from math import sin,sqrt,cos
+''' ok '''
 
 __author__ = 'fredy'
 
@@ -11,13 +12,22 @@ def aleatorios(m,M,d):
         vector.append(random.uniform(m,M))
     return vector
 
-def sumatoria(v):
-    s=0
-    for i in range(0,4):
-        s=s+(v[i]*sin(sqrt(abs(v[i]))))
-    return s
+def sumatoria_dos(v,m):
+    suma=0
+    for i in range(1,m):
+        suma = suma + (i*cos((i+1)*v[1]+i))
+    return suma
+
+def sumatoria_uno(v,m):
+    suma=0
+    for i in range(1,m):
+        suma = suma + (i*cos((i+1)*v[0]+i))
+    return suma
+
 def evaluar(vector):
-    fx = 418.9829*4 + sumatoria(vector)
+    m=6
+    fx= - sumatoria_uno(vector,m) * sumatoria_dos(vector,m)
+
     return fx
 
 def Mutar(v,Q):
@@ -44,10 +54,10 @@ def modificar_exitos(e,Q,n):
 
 def main():
     generaciones = 100000
-    d=4
+    d=2
     numerito = 20
-    m=-500
-    M=500
+    m=-10
+    M=10
     padre=aleatorios(m,M,d)
 
     #Evaluar la función de X

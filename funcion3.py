@@ -1,6 +1,7 @@
 # -*- encoding: utF-8 -*-
 import random
-from math import sin,sqrt
+from math import cos
+from math import pi
 
 __author__ = 'fredy'
 
@@ -9,22 +10,24 @@ def aleatorios(m,M,d):
     vector = []
     for i in range(d):
         vector.append(random.uniform(m,M))
+    #print vector
     return vector
 
-def sumatoria(v):
-    s=0
-    for i in range(0,4):
-        s=s+(v[i]*sin(sqrt(abs(v[i]))))
-    return s
+
 def evaluar(vector):
-    fx = 418.9829*4 + sumatoria(vector)
+    fx = 0.5 + ((
+
+                )/())
+    #print fx
     return fx
 
 def Mutar(v,Q):
     hijo = []
-    for i in range(len(v)): hijo.append(v[i]+random.uniform(0,1)*Q)
+    for i in range(len(v)):
+        hijo.append(v[i]+random.uniform(0,1)*Q)
+        #random.gauss
+    #print hijo
     return hijo
-
 def comparar(ap_pa,ap_hijo):
     if ap_hijo<ap_pa:
         return True
@@ -34,7 +37,7 @@ def comparar(ap_pa,ap_hijo):
 def modificar_exitos(e,Q,n):
     float(e)
     float(Q)
-    C=1
+    C=0.9
     if e/n == 0.5:
         return Q
     elif e/n < 0.5:
@@ -46,8 +49,8 @@ def main():
     generaciones = 100000
     d=4
     numerito = 20
-    m=-500
-    M=500
+    m=-5.12
+    M=5.12
     padre=aleatorios(m,M,d)
 
     #Evaluar la función de X

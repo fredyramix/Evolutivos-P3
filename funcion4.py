@@ -2,7 +2,7 @@
 import random
 from math import cos,sin
 from math import pi
-
+''' ok '''
 __author__ = 'fredy'
 
 
