@@ -60,7 +60,7 @@ def modificar_exitos(e,Q,n):
         return Q/C
 
 def main():
-    generaciones = 100000
+    generaciones = 10000
     d=4
     numerito = 20
     m=0

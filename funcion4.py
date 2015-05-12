@@ -10,7 +10,6 @@ def aleatorios(m,M,d):
     vector = []
     for i in range(d):
         vector.append(random.uniform(m,M))
-    #print vector
     return vector
 
 def evaluar(v):
@@ -38,8 +37,13 @@ def modificar_exitos(e,Q,n):
         return Q*C
     else:
         return Q/C
-
+def Escribir(out,cadena):
+    out.write(cadena)
+    out.write('\n')
 def main():
+    outfile=open('funcion4.txt','w')
+    a="--------------------Funcion 4-----------------------\n"
+    Escribir(outfile,a)
     generaciones = 10000
     d=2
     numerito = 20
@@ -48,13 +52,16 @@ def main():
     padre=aleatorios(m,M,d)
     #Evaluar la función de X
     aptitud_padre=evaluar(padre)
-    print "Padre: \n"+"Vector: "+ str(padre) + "\tAptitud: " + str(aptitud_padre)
+    a="Padre: \n"+"Vector: "+ str(padre) + "\tAptitud: " + str(aptitud_padre)
+    Escribir(outfile,a)
     #sigma
     Q=0.1
     exitos = 0
     hijo = Mutar(padre,Q)
     aptitud_hijo = evaluar(hijo)
-    print "Hijo: \n"+"Vector: "+ str(hijo) + "\tAptitud: " + str(aptitud_hijo)
+    #print "Hijo: "+ str(hijo) + "\tAptitud: " + str(aptitud_hijo)
+    a="Hijo:"+ str(hijo) + "\tAptitud: " + str(aptitud_hijo)
+    Escribir(outfile,a)
     if comparar(aptitud_padre,aptitud_hijo):
         exitos  = exitos +1
         padre = hijo[:] #sustituimos al padre
@@ -77,6 +84,11 @@ def main():
             Q=modificar_exitos(exitos,Q,numerito)
             exitos=0
         g = g+ 1
-    print "Final: \n"+"Vector: "+ str(padre) + "\tAptitud: " + str(aptitud_padre)
+        a="Generacion: "+str(g)+" vector"+ str(padre) + "\tAptitud: " + str(aptitud_padre) +"  sigma: "+str(Q)
+        #print "Generacion: "+str(g)+" vector"+ str(padre) + "\tAptitud: " + str(aptitud_padre) +"  sigma: "+str(Q)+"\n"
+        Escribir(outfile,a)
+
+    outfile.close()
+
 
 main()

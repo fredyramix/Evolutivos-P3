@@ -4,8 +4,6 @@ from math import cos
 from math import pi
 
 __author__ = 'fredy'
-
-
 def aleatorios(m,M,d):
     vector = []
     for i in range(d):
@@ -14,11 +12,9 @@ def aleatorios(m,M,d):
     return vector
 
 
-def evaluar(vector):
-    fx = 0.5 + ((
-
-                )/())
-    #print fx
+def evaluar(v):
+    #sin2(x) = 1/2 - 1/2 cos(2x)
+    fx = 0.5 + (((1/2 - 1/2 *cos(2*(pow(v[0],2)-pow(v[1],2))))-0.5)/pow((1+0.001*(pow(v[0],2)+pow(v[1],2))),2))
     return fx
 
 def Mutar(v,Q):
@@ -47,10 +43,10 @@ def modificar_exitos(e,Q,n):
 
 def main():
     generaciones = 100000
-    d=4
+    d=2
     numerito = 20
-    m=-5.12
-    M=5.12
+    m=-100
+    M=100
     padre=aleatorios(m,M,d)
 
     #Evaluar la función de X

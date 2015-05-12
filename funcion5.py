@@ -1,9 +1,7 @@
 # -*- encoding: utF-8 -*-
 import random
 from math import sin,sqrt
-
 __author__ = 'fredy'
-
 
 def aleatorios(m,M,d):
     vector = []

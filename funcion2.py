@@ -27,8 +27,6 @@ def Mutar(v,Q):
     hijo = []
     for i in range(len(v)):
         hijo.append(v[i]+random.uniform(0,1)*Q)
-        #random.gauss
-    #print hijo
     return hijo
 def comparar(ap_pa,ap_hijo):
     if ap_hijo<ap_pa:
